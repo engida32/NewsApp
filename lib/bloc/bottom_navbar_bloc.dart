@@ -22,4 +22,7 @@ class NAvBarItemBlock {
         break;
     }
   }
+  close(){
+    navBarController?.close();
+  }
 }
