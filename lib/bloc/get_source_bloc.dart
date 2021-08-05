@@ -1,6 +1,6 @@
 import 'package:newsapp/model/source_response.dart';
 import 'package:newsapp/repository/repository.dart';
-import 'package:rxdart/subjects.dart';
+import 'package:rxdart/rxdart.dart';
 
 class GetSourcesBloc {
   final NewsRepository repository = NewsRepository();
@@ -11,3 +11,4 @@ class GetSourcesBloc {
     _subject.sink.add(response);
   }
 }
+ 
