@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/bloc/bottom_navbar_bloc.dart';
 import 'package:newsapp/style/theme.dart' as Style;
+
 class MainSreen extends StatefulWidget {
   MainSreen({Key? key}) : super(key: key);
 
@@ -10,50 +11,53 @@ class MainSreen extends StatefulWidget {
 }
 
 class _MainSreenState extends State<MainSreen> {
- late BottomNavBarBlock _navBarController;
- @override
- void initState() {
+  late BottomNavBarBlock _navBarController;
+  @override
+  void initState() {
     super.initState();
-    _navBarController=BottomNavBarBlock();
+    _navBarController = BottomNavBarBlock();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-       preferredSize: Size.fromHeight(50),
-       child: AppBar(
-         backgroundColor: Style.Colors.mainColor,
-          title:Text("NewsApp",style:TextStyle(
-            color:Colors.white,
-          ))
-       )
-      ),
-      body: SafeArea(child: StreamBuilder<NavBarItem>(
-        stream: _navBarController.itemStream,
-        initialData: _navBarController.defaultItem,
-        builder: (BuildContext context, AsyncSnapshot<NavBarItem> snapshot){
-        switch (snapshot.data) {
-          case :NavBarItem.HOME;
-          return Container();
-          case :NavBarItem.SOURCE;
-          return Container();
-          case :NavBarItem.SEARCH;
-          return Container();
-         default:
-        }
-        },),),
-        
-        bottomNavigationBar:StreamBuilder(
-        stream: _navBarController.itemStream,
-        initialData: _navBarController.defaultItem,
-          builder: (BuildContext context, AsyncSnapshot<NavBarItem> snapshot){
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: AppBar(
+                backgroundColor: Style.Colors.mainColor,
+                title: Text("NewsApp",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )))),
+        body: SafeArea(
+          child: StreamBuilder<NavBarItem>(
+            stream: _navBarController.itemStream,
+            initialData: _navBarController.defaultItem,
+            builder:
+                (BuildContext context, AsyncSnapshot<NavBarItem> snapshot) {
+              switch (snapshot.data) {
+                case NavBarItem.HOME:
+                  return testScreen();
+                case NavBarItem.SOURCE:
+                  return testScreen();
+                case NavBarItem.SEARCH:
+                  return testScreen();
+                default:
+              }
+              return Container();
+            },
+          ),
+        ),
+        bottomNavigationBar: StreamBuilder(
+          stream: _navBarController.itemStream,
+          initialData: _navBarController.defaultItem,
+          builder: (BuildContext context, AsyncSnapshot<NavBarItem> snapshot) {
             return Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(30),
-                  topLeft: Radius.circular(30),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -61,16 +65,13 @@ class _MainSreenState extends State<MainSreen> {
                       spreadRadius: 0,
                       blurRadius: 19,
                     )
-                  ]
-              ),
+                  ]),
               child: ClipRRect(
-                borderRadius:BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30)
-                ),
-                child: BottomNavigationBar
-                (
-                  backgroundColor:Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)),
+                child: BottomNavigationBar(
+                  backgroundColor: Colors.white,
                   iconSize: 20,
                   unselectedItemColor: Colors.grey,
                   unselectedFontSize: 9.6,
@@ -78,38 +79,44 @@ class _MainSreenState extends State<MainSreen> {
                   type: BottomNavigationBarType.fixed,
                   onTap: _navBarController.pickItem,
                   items: [
-
                     BottomNavigationBarItem(
-                      title:Padding(padding: EdgeInsets.only(top: 5),
-                      child:Text("Home")
-                      ),
-                      icon: Icon(EvaIcons.homeOutline),
-                      activeIcon: Icon(EvaIcons.home)
-                    ),
-                            BottomNavigationBarItem(
-                      title:Padding(padding: EdgeInsets.only(top: 5),
-                      child:Text("Home")
-                      ),
-                      icon: Icon(EvaIcons.homeOutline),
-                      activeIcon: Icon(EvaIcons.home)
-                    ),
-                            BottomNavigationBarItem(
-                      title:Padding(padding: EdgeInsets.only(top: 5),
-                      child:Text("Home")
-                      ),
-                      icon: Icon(EvaIcons.homeOutline),
-                      activeIcon: Icon(EvaIcons.home)
-                    )
+                        title: Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Text("Home")),
+                        icon: Icon(EvaIcons.homeOutline),
+                        activeIcon: Icon(EvaIcons.home)),
+                    BottomNavigationBarItem(
+                        title: Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Text("Home")),
+                        icon: Icon(EvaIcons.homeOutline),
+                        activeIcon: Icon(EvaIcons.home)),
+                    BottomNavigationBarItem(
+                        title: Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Text("Home")),
+                        icon: Icon(EvaIcons.homeOutline),
+                        activeIcon: Icon(EvaIcons.home))
                   ],
-
                 ),
               ),
             );
           },
-          
-           )
-           );
-          
-  
-}
+        ));
+  }
+
+  Widget testScreen() {
+    return Container(
+
+      color: Colors.white,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(" Test Screen")
+        ],
+      ),
+    );
+  }
 }
