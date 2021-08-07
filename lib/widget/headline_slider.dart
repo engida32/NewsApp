@@ -110,7 +110,12 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                   )
                 )
 
-              )
+              ),
+              Positioned(
+                bottom:10, 
+                left:10,
+                
+                child: )
         
           ],
         ),
