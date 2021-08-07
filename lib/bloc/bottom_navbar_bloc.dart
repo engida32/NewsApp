@@ -23,6 +23,6 @@ class BottomNavBarBlock {
     }
   }
   close(){
-    navBarController?.close();
+    navBarController.close();
   }
 }

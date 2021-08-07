@@ -42,8 +42,8 @@ class _MainSreenState extends State<MainSreen> {
                 case NavBarItem.SOURCE:
                   return testScreen();
                 case NavBarItem.SEARCH:
-                  return testScreen();
-                default:
+                  return Container();
+            
               }
               return Container();
             },
@@ -74,10 +74,12 @@ class _MainSreenState extends State<MainSreen> {
                   backgroundColor: Colors.white,
                   iconSize: 20,
                   unselectedItemColor: Colors.grey,
-                  unselectedFontSize: 9.6,
-                  selectedFontSize: 9.5,
+                  selectedFontSize: 12,
+                  unselectedFontSize: 10,
                   type: BottomNavigationBarType.fixed,
                   onTap: _navBarController.pickItem,
+                  fixedColor: Style.Colors.mainColor,
+                  currentIndex: snapshot.data!.index,
                   items: [
                     BottomNavigationBarItem(
                         title: Padding(
@@ -88,13 +90,13 @@ class _MainSreenState extends State<MainSreen> {
                     BottomNavigationBarItem(
                         title: Padding(
                             padding: EdgeInsets.only(top: 5),
-                            child: Text("Home")),
+                            child: Text("Category")),
                         icon: Icon(EvaIcons.homeOutline),
                         activeIcon: Icon(EvaIcons.home)),
                     BottomNavigationBarItem(
                         title: Padding(
                             padding: EdgeInsets.only(top: 5),
-                            child: Text("Home")),
+                            child: Text("Search")),
                         icon: Icon(EvaIcons.homeOutline),
                         activeIcon: Icon(EvaIcons.home))
                   ],
