@@ -96,7 +96,17 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                   padding: EdgeInsets.only(left:10, right:10),
                   width: 250,
                   child:Column(
-                    
+                    children: [
+                      Text(
+                        article.title, 
+                        style:TextStyle(
+                          height:1.5,
+                          color:Colors.white,
+                          fontSize:12,
+                          fontWeight:FontWeight.bold,
+                        )
+                      )
+                    ],
                   )
                 )
 
