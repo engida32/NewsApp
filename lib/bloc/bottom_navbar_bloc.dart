@@ -2,7 +2,7 @@ import 'dart:async';
 
 enum NavBarItem { HOME, SOURCE, SEARCH }
 
-class NAvBarItemBlock {
+class BottomNavBarBlock {
   final StreamController<NavBarItem> navBarController =
       StreamController<NavBarItem>.broadcast();
   NavBarItem defaultItem = NavBarItem.HOME;
