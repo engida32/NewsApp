@@ -1,7 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/bloc/get_top_headlines_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
+import 'package:newsapp/model/article.dart';
 import 'package:newsapp/model/article_response.dart';
 
 class HeadLineSliderWidget extends StatefulWidget {
@@ -30,11 +32,35 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
           }
           return _buildLinearSlider(snapshot.data);
         } else if (snapshot.hasError) {
-          return buildErrorWidget(snapshot.hasError);
+          return buildErrorWidget(snapshot.data!.error);
         } else {
           buildLoadingWidget();
         }
       },
     );
+  }
+
+  Widget _buildLinearSlider(ArticleResponse data) {
+    List<ArticleModel> articles = data.articles;
+    return Container(
+        child: CarouselSlider(
+      options: CarouselOptions(
+        enlargeCenterPage: false,
+        viewportFraction: 0.9,
+        height: 200,
+      ),
+      items: getSliderItem(articles),
+    ));
+  }
+
+  getSliderItem(List<ArticleModel> articles) {
+    return articles.map((article) => GestureDetector(
+        onTap: () {},
+        child: Container(
+            padding: EdgeInsets.only(
+          left: 5,
+          right: 5,
+          bottom: 10,
+        ))));
   }
 }
