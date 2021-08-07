@@ -26,22 +26,23 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<ArticleResponse>(
       stream: getTopHeadlinesBloc.subject.stream,
-      builder: (BuildContext context, AsyncSnapshot<ArticleResponse> snapshot) {
+      builder: (context, AsyncSnapshot<ArticleResponse> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.error != null && snapshot.data!.error.length > 0) {
             return buildErrorWidget(snapshot.data!.error);
           }
-          return _buildLinearSlider(snapshot.data);
+          return _buildHeadLineSlider(snapshot.data!);
         } else if (snapshot.hasError) {
           return buildErrorWidget(snapshot.data!.error);
         } else {
           buildLoadingWidget();
         }
+        return Container();
       },
     );
   }
 
-  Widget _buildLinearSlider(ArticleResponse data) {
+  Widget _buildHeadLineSlider(ArticleResponse data) {
     List<ArticleModel> articles = data.articles;
     return Container(
         child: CarouselSlider(
@@ -58,79 +59,65 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
     return articles.map((article) => GestureDetector(
         onTap: () {},
         child: Container(
-            padding: EdgeInsets.only(
-          left: 5,
-          right: 5,
-          bottom: 10,
-        ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
+          padding: EdgeInsets.only(
+            left: 5,
+            right: 5,
+            bottom: 10,
+          ),
+          child: Stack(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 shape: BoxShape.rectangle,
-                image: DecorationImage( 
-                fit: BoxFit.cover,
-                  image: NetworkImage(article.img)
-                  //:AssetImage("assets/images/placeholder.jpg")
-               
-                  ),
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: NetworkImage(article.img)
+                    //:AssetImage("assets/images/placeholder.jpg")
 
-                )
-              ),
+                    ),
+              )),
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(9)),
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                   end:Alignment.topCenter,
-                   colors: [
-                     Colors.black.withOpacity(0.9),
-                     Colors.white.withOpacity(0),
-                   ] 
-                  )
-                )
-              ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.9),
+                            Colors.white.withOpacity(0),
+                          ]))),
               Positioned(
-                bottom:30,
-                child:Container(
-                  padding: EdgeInsets.only(left:10, right:10),
-                  width: 250,
-                  child:Column(
-                    children: [
-                      Text(
-                        article.title, 
-                        style:TextStyle(
-                          height:1.5,
-                          color:Colors.white,
-                          fontSize:12,
-                          fontWeight:FontWeight.bold,
-                        )
-                      )
-                    ],
-                  )
-                )
-
-              ),
+                  bottom: 30,
+                  child: Container(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      width: 250,
+                      child: Column(
+                        children: [
+                          Text(article.title,
+                              style: TextStyle(
+                                height: 1.5,
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ))
+                        ],
+                      ))),
               Positioned(
-                bottom:10, 
-                left:10,
-
-                child:(
-                  Text(timeAgo(DateTime.parse(article.date)))
-                 )
-        
-              )
-              
-              ],
-        ),
-        
-        )
-        )
-        );
-
+                  bottom: 10,
+                  left: 10,
+                  child: (Text(
+                    timeAgo(DateTime.parse(article.date)),
+                    style: TextStyle(
+                      color: Colors.white54,
+                      fontSize: 9,
+                    ),
+                  )))
+            ],
+          ),
+        )));
   }
-  String timeAgo(DateTime date){
-    return timeago.format(date,allowFromNow: true,locale: 'en');
+
+  String timeAgo(DateTime date) {
+    return timeago.format(date, allowFromNow: true, locale: 'en');
   }
 }

@@ -3,12 +3,12 @@ import 'package:newsapp/repository/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GetTopHeadlinesBloc {
-  final NewsRepository _repository = NewsRepository();
+  final NewsRepository repository = NewsRepository();
   final BehaviorSubject<ArticleResponse> _subject =
       BehaviorSubject<ArticleResponse>();
 
   getHeadlines() async {
-    ArticleResponse response = await _repository.getTopHeadLines();
+    ArticleResponse response = await repository.getTopHeadLines();
     _subject.sink.add(response);
   }
 
