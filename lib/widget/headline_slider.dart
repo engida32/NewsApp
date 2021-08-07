@@ -61,6 +61,51 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
           left: 5,
           right: 5,
           bottom: 10,
-        ))));
+        ),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                shape: BoxShape.rectangle,
+                image: DecorationImage( 
+                fit: BoxFit.cover,
+                  image: NetworkImage(article.img)
+                  //:AssetImage("assets/images/placeholder.jpg")
+               
+                  ),
+
+                )
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(9)),
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                   end:Alignment.topCenter,
+                   colors: [
+                     Colors.black.withOpacity(0.9),
+                     Colors.white.withOpacity(0),
+                   ] 
+                  )
+                )
+              ),
+              Positioned(
+                bottom:30,
+                child:Container(
+                  padding: EdgeInsets.only(left:10, right:10),
+                  width: 250,
+                  child:Column(
+                    
+                  )
+                )
+
+              )
+        
+          ],
+        ),
+        
+        )));
+
   }
 }
