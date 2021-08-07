@@ -5,6 +5,7 @@ import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
 import 'package:newsapp/model/article.dart';
 import 'package:newsapp/model/article_response.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HeadLineSliderWidget extends StatefulWidget {
   const HeadLineSliderWidget({Key? key}) : super(key: key);
@@ -114,13 +115,22 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
               Positioned(
                 bottom:10, 
                 left:10,
-                
-                child: )
+
+                child:(
+                  Text(timeAgo(DateTime.parse(article.date)))
+                 )
         
-          ],
+              )
+              
+              ],
         ),
         
-        )));
+        )
+        )
+        );
 
+  }
+  String timeAgo(DateTime date){
+    return timeago.format(date,allowFromNow: true,locale: 'en');
   }
 }
