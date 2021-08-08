@@ -1,4 +1,5 @@
  import 'package:flutter/material.dart';
+import 'package:newsapp/widget/headline_slider.dart';
 
 class HomeScreen extends StatefulWidget {
    const HomeScreen({ Key? key }) : super(key: key);
@@ -12,7 +13,7 @@ class HomeScreen extends StatefulWidget {
    Widget build(BuildContext context) {
      return ListView(
        children: [
-         
+         HeadLineSliderWidget(),
        ],
      );
    }
