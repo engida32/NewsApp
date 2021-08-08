@@ -5,10 +5,10 @@ import 'package:newsapp/model/source_response.dart';
 class NewsRepository {
   static String mainUrl = "https://newsapi.org/v2/";
   final String apiKey = "68fc81a3058546c59fcd4fef22cb005c";
-  final _dio = Dio();
-  var getSourceUrl = "$mainUrl/sources";
-  var getTopHeadlinesUrl = "$mainUrl/top_headlines";
-  var everythingUrl = "$mainUrl/everything";
+  final Dio _dio = Dio();
+  var getSourceUrl = '$mainUrl/sources';
+  var getTopHeadlinesUrl = '$mainUrl/top-headlines';
+  var everythingUrl = '$mainUrl/everything';
 
   Future<SourceResponse> getSources() async {
     var params = {"apiKey": apiKey, "language": "en", "country": "us"};
