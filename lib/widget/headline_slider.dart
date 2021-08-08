@@ -17,7 +17,6 @@ class HeadLineSliderWidget extends StatefulWidget {
 class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getTopHeadlinesBloc.getHeadlines();
   }
@@ -26,18 +25,18 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<ArticleResponse>(
       stream: getTopHeadlinesBloc.subject.stream,
-      builder: (context, AsyncSnapshot<ArticleResponse> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<ArticleResponse> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.error != null && snapshot.data!.error.length > 0) {
+          if (snapshot.data!.error!= null && snapshot.data!.error.length > 0) {
             return buildErrorWidget(snapshot.data!.error);
           }
           return _buildHeadLineSlider(snapshot.data!);
         } else if (snapshot.hasError) {
           return buildErrorWidget(snapshot.data!.error);
         } else {
-          buildLoadingWidget();
+         return  buildLoadingWidget();
         }
-        return Container();
+     
       },
     );
   }
@@ -56,65 +55,68 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
   }
 
   getSliderItem(List<ArticleModel> articles) {
-    return articles.map((article) => GestureDetector(
-        onTap: () {},
-        child: Container(
-          padding: EdgeInsets.only(
-            left: 5,
-            right: 5,
-            bottom: 10,
-          ),
-          child: Stack(
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                shape: BoxShape.rectangle,
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: NetworkImage(article.img)
-                    //:AssetImage("assets/images/placeholder.jpg")
+    return articles
+        .map((article) => GestureDetector(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.only(
+                left: 5,
+                right: 5,
+                bottom: 10,
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                        fit: BoxFit.cover, 
+                        //image: NetworkImage(article.img)
+                        image:AssetImage("assets/images/placeholder.jpg")
 
-                    ),
-              )),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(9)),
-                      gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                            Colors.black.withOpacity(0.9),
-                            Colors.white.withOpacity(0),
-                          ]))),
-              Positioned(
-                  bottom: 30,
-                  child: Container(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      width: 250,
-                      child: Column(
-                        children: [
-                          Text(article.title,
-                              style: TextStyle(
-                                height: 1.5,
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ))
-                        ],
-                      ))),
-              Positioned(
-                  bottom: 10,
-                  left: 10,
-                  child: (Text(
-                    timeAgo(DateTime.parse(article.date)),
-                    style: TextStyle(
-                      color: Colors.white54,
-                      fontSize: 9,
-                    ),
-                  )))
-            ],
-          ),
-        )));
+                        ),
+                  )),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(9)),
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Colors.black.withOpacity(0.9),
+                                Colors.white.withOpacity(0),
+                              ]))),
+                  Positioned(
+                      bottom: 30,
+                      child: Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          width: 250,
+                          child: Column(
+                            children: [
+                              Text(article.title,
+                                  style: TextStyle(
+                                    height: 1.5,
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                            ],
+                          ))),
+                  Positioned(
+                      bottom: 10,
+                      left: 10,
+                      child: (Text(
+                        timeAgo(DateTime.parse(article.date)),
+                        style: TextStyle(
+                          color: Colors.white54,
+                          fontSize: 9,
+                        ),
+                      )))
+                ],
+              ),
+            )))
+        .toList();
   }
 
   String timeAgo(DateTime date) {
