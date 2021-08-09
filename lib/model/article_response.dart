@@ -1,5 +1,4 @@
 import 'package:newsapp/model/article.dart';
-import 'package:newsapp/model/source.dart';
 
 class ArticleResponse {
   final List<ArticleModel> articles;
