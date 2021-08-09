@@ -11,4 +11,4 @@ class GetSourcesBloc {
     _subject.sink.add(response);
   }
 }
- 
+ final getSourcesBloc = GetSourcesBloc();
