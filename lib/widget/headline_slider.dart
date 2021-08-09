@@ -18,7 +18,7 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
   @override
   void initState() {
     super.initState();
-    getTopHeadlinesBloc.getHeadlines();
+    getTopHeadlinesBloc.getHeadlines(); 
   }
 
   @override
