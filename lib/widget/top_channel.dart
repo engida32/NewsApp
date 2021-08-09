@@ -86,8 +86,9 @@ class _TopChannelState extends State<TopChannel> {
                       ),
                       SizedBox(height: 10),
 
-                    Text(sources[index].name),
-                    maxLines:2,
+                    Text(sources[index].name,
+                    maxLines: 2,
+                    
                     textAlign:TextAlign.center,
                     style:TextStyle(
                       height:1.4,
@@ -95,7 +96,14 @@ class _TopChannelState extends State<TopChannel> {
                       fontWeight:FontWeight.bold,
                       fontSize:10,
                     )
-
+                    ),
+                    SizedBox(height: 3),
+                  Text(sources[index].category,
+                    style:TextStyle(
+                      color:Colors.black54,
+                      fontSize: 9
+                    )
+                     )
                     ],
 
                   ));
