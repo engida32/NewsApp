@@ -25,7 +25,7 @@ class _TopChannelState extends State<TopChannel> {
       stream: getSourcesBloc.subject.stream,
       builder: (BuildContext context, AsyncSnapshot<SourceResponse> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.error != null && snapshot.data!.error.length > 0) {
+          if (snapshot.data!.error!= null && snapshot.data!.error.length > 0) {
             return buildErrorWidget(snapshot.data!.error);
           }
           return buildTopChannel(snapshot.data!);
