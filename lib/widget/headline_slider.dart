@@ -23,7 +23,7 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ArticleResponse>(
+    return StreamBuilder<ArticleResponse?>(
       stream: getTopHeadlinesBloc.subject.stream,
       builder: (BuildContext context, AsyncSnapshot<ArticleResponse?> snapshot) {
         if (snapshot.hasData) {
