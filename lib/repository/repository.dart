@@ -9,28 +9,39 @@ class NewsRepository {
   var getSourceUrl = '$mainUrl/sources';
   var getTopHeadlinesUrl = '$mainUrl/top-headlines';
   var everythingUrl = '$mainUrl/everything';
+  var source2 = 'https://newsapi.org/v2/"top-headlines/sources';
 
   Future<SourceResponse> getSources() async {
     var params = {"apiKey": apiKey, "language": "en", "country": "us"};
 
     try {
       Response response = await _dio.get(getSourceUrl, queryParameters: params);
+      print(response.data.toString());
+
       return SourceResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print(" Exception occured : $error stacktrace :$stacktrace");
+      print(          "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
       return SourceResponse.withError("$error");
     }
   }
 
 //get top head lines from api
   Future<ArticleResponse> getTopHeadLines() async {
-    var params = {"apiKey": apiKey, "country": "us"};
+    var params = {
+      "apiKey": apiKey,
+     "country": "us",
+     "publishedAt":"publishedAt"
+
+      };
     try {
       Response response =
           await _dio.get(getTopHeadlinesUrl, queryParameters: params);
       return ArticleResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
+            print( "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+
       return ArticleResponse.withError("$error");
     }
   }
@@ -47,31 +58,30 @@ class NewsRepository {
       return ArticleResponse.withError("$error");
     }
   }
-    //////// getting hot news from repository 
-    Future<ArticleResponse> getHotNews() async {
-      var params = {"apiKey": apiKey, "q": "apple", "sortBy": "popularity"};
 
-      try {
-        Response response =
-            await _dio.get(everythingUrl, queryParameters: params);
-        return ArticleResponse.fromJson(response.data);
-      } catch (error, stacktrace) {
-        print("Exception occured: $error stackTrace: $stacktrace");
-        return ArticleResponse.withError("$error");
-      }
-    }
+  //////// getting hot news from repository
+  Future<ArticleResponse> getHotNews() async {
+    var params = {"apiKey": apiKey, "q": "apple", "sortBy": "popularity"};
 
-    Future<ArticleResponse> getSourceNews(String sourceId ) async {
-        var params = {
-      "apiKey": apiKey,
-      "sources" : sourceId};
-          try {
-      Response response = await _dio.get(getTopHeadlinesUrl, queryParameters: params);
+    try {
+      Response response =
+          await _dio.get(everythingUrl, queryParameters: params);
       return ArticleResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return ArticleResponse.withError("$error");
     }
-    }
   }
 
+  Future<ArticleResponse> getSourceNews(String sourceId) async {
+    var params = {"apiKey": apiKey, "sources": sourceId};
+    try {
+      Response response =
+          await _dio.get(getTopHeadlinesUrl, queryParameters: params);
+      return ArticleResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return ArticleResponse.withError("$error");
+    }
+  }
+}

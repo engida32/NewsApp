@@ -23,20 +23,19 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ArticleResponse?>(
+    return StreamBuilder<ArticleResponse>(
       stream: getTopHeadlinesBloc.subject.stream,
-      builder: (BuildContext context, AsyncSnapshot<ArticleResponse?> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<ArticleResponse> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.error!= null && snapshot.data!.error.length > 0) {
+          if (snapshot.data!.error.length > 0) {
             return buildErrorWidget(snapshot.data!.error);
           }
           return _buildHeadLineSlider(snapshot.data!);
         } else if (snapshot.hasError) {
           return buildErrorWidget(snapshot.data!.error);
         } else {
-         return  buildLoadingWidget();
+          return buildLoadingWidget();
         }
-     
       },
     );
   }
@@ -55,8 +54,10 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
   }
 
   getSliderItem(List<ArticleModel> articles) {
+    print(timeUtil( DateTime.parse(articles.publishedAt)));
     return articles
-        .map((article) => GestureDetector(
+        .map(
+          (article) => GestureDetector(
             onTap: () {},
             child: Container(
               padding: EdgeInsets.only(
@@ -70,12 +71,9 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                       decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     shape: BoxShape.rectangle,
-                    image: DecorationImage(
-                        fit: BoxFit.cover, 
-                        //image: NetworkImage(article.img)
-                        image:AssetImage("assets/images/placeholder.jpg")
-
-                        ),
+                    image: new DecorationImage(
+                        fit: BoxFit.cover,
+                        image    : NetworkImage(article.urlToImage)),
                   )),
                   Container(
                       decoration: BoxDecoration(
@@ -103,23 +101,25 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                                   ))
                             ],
                           ))),
-                  Positioned(
-                      bottom: 10,
-                      left: 10,
-                      child: (Text(
-                        timeAgo(DateTime.parse(article.date)),
-                        style: TextStyle(
-                          color: Colors.white54,
-                          fontSize: 9,
-                        ),
-                      )))
+                  // Positioned(
+                  //     bottom: 10,
+                  //     left: 10,
+                  //     child: Text(
+                  //       timeUtil(DateTime.parse(article.date)),
+                  //       style: TextStyle(
+                  //         color: Colors.white54,
+                  //         fontSize: 9),
+                  //     )
+                  //     )
                 ],
               ),
-            )))
+            ),
+          ),
+        )
         .toList();
   }
 
-  String timeAgo(DateTime date) {
+  String timeUtil(DateTime date) {
     return timeago.format(date, allowFromNow: true, locale: 'en');
   }
 }
