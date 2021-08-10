@@ -6,9 +6,11 @@ class GetSourcesNewsBloc {
   final NewsRepository repository = NewsRepository();
   final BehaviorSubject<ArticleResponse> _subject =
       BehaviorSubject<ArticleResponse>();
-  void drainStreams() {
-    _subject.value = null;
-  }
+  // void drainStreams() {
+  //   _subject.value = null;
+    
+  // }
+
 
   void dispose() async {
     await _subject.drain();
