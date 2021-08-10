@@ -4,6 +4,7 @@ import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
 import 'package:newsapp/model/article.dart';
 import 'package:newsapp/model/article_response.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HotNews extends StatefulWidget {
   const HotNews({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _HotNewsState extends State<HotNews> {
 
   Widget buildHotNewsWidget(ArticleResponse data) {
     List<ArticleModel> articles = data.articles;
-    if (articles.length > 0) {
+    if (articles.length < 0) {
       return Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -55,7 +56,7 @@ class _HotNewsState extends State<HotNews> {
       );
     } else {
       return Container(
-        height: articles.length / 2 * 210,
+        height: articles.length / 2 * 100,
         padding: EdgeInsets.all(5),
         child: GridView.builder(
           physics: NeverScrollableScrollPhysics(),
@@ -64,7 +65,7 @@ class _HotNewsState extends State<HotNews> {
           itemCount: articles.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: EdgeInsets.only(left: 5, right: 5, top: 10),
+              padding: EdgeInsets.only(left: 5, right: 5, top: 1),
               child: GestureDetector(
                 onTap: () {},
                 child: Container(
@@ -141,7 +142,8 @@ class _HotNewsState extends State<HotNews> {
                             fontSize:10,                     ),
                              ),
                                Text(
-                               articles[index].source.name, style: TextStyle(
+                              timeUtil(DateTime.parse(articles[index].publishedAt)),
+                               style: TextStyle(
                             color: Color(0xfff6511d),      
                             fontSize:10,                     ),
                              )
@@ -149,16 +151,20 @@ class _HotNewsState extends State<HotNews> {
                          ),
                          
                          )
-                    ]),                      
+                    ],
+                    ),
                       )
                     
                   ),
-                ) 
-              ),
+                ); 
+           } ),
             );
-          },
-        ),
-      );
+          
+      
+      
     }
+  }
+    String timeUtil(DateTime date) {
+    return timeago.format(date, allowFromNow: true, locale: 'en');
   }
 }
