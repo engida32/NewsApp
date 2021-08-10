@@ -35,7 +35,8 @@ class _HotNewsState extends State<HotNews> {
       },
     );
   }
-  Widget buildHotNewsWidget(ArticleResponse data){
-    
+
+  Widget buildHotNewsWidget(ArticleResponse data) {
+    return Container();
   }
 }
