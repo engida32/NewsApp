@@ -27,15 +27,15 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  bloc: ^6.0.1
-  rxdart: ^0.24.1
-  dio: ^3.0.10
-  eva_icons_flutter: ^2.0.1
-  carousel_slider: ^2.2.1
-  timeago: ^2.0.26
-  flutter_html: ^0.11.1
-  url_launcher: ^5.5.0
+  cupertino_icons: ^1.0.3
+  bloc: ^7.0.0
+  rxdart: ^0.27.1
+  dio: ^4.0.0
+  eva_icons_flutter: ^3.0.0
+  carousel_slider: ^4.0.0
+  timeago: ^3.1.0
+  flutter_html: ^2.1.1
+  url_launcher: ^6.0.9
 
 
 
