@@ -135,7 +135,16 @@ class _HotNewsState extends State<HotNews> {
                          child: Row(
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
-                             
+                             Text(
+                               articles[index].source.name, style: TextStyle(
+                            color: Color(0xfff6511d),      
+                            fontSize:10,                     ),
+                             ),
+                               Text(
+                               articles[index].source.name, style: TextStyle(
+                            color: Color(0xfff6511d),      
+                            fontSize:10,                     ),
+                             )
                            ]
                          ),
                          
