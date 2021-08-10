@@ -42,19 +42,23 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
 
   Widget _buildHeadLineSlider(ArticleResponse data) {
     List<ArticleModel> articles = data.articles;
+
     return Container(
+      padding: EdgeInsets.only(top: 10),
         child: CarouselSlider(
       options: CarouselOptions(
         enlargeCenterPage: false,
         viewportFraction: 0.9,
-        height: 200,
+        autoPlay: true,
+      
+        height: 250,
       ),
       items: getSliderItem(articles),
     ));
   }
 
   getSliderItem(List<ArticleModel> articles) {
-    print(timeUtil( DateTime.parse(articles.publishedAt)));
+    // print(articles.publishedAt.toString());
     return articles
         .map(
           (article) => GestureDetector(
@@ -73,7 +77,7 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                     shape: BoxShape.rectangle,
                     image: new DecorationImage(
                         fit: BoxFit.cover,
-                        image    : NetworkImage(article.urlToImage)),
+                        image: NetworkImage(article.urlToImage)),
                   )),
                   Container(
                       decoration: BoxDecoration(
@@ -93,24 +97,25 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                           child: Column(
                             children: [
                               Text(article.title,
+                              textAlign: TextAlign.center,
                                   style: TextStyle(
                                     height: 1.5,
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                   ))
                             ],
                           ))),
-                  // Positioned(
-                  //     bottom: 10,
-                  //     left: 10,
-                  //     child: Text(
-                  //       timeUtil(DateTime.parse(article.date)),
-                  //       style: TextStyle(
-                  //         color: Colors.white54,
-                  //         fontSize: 9),
-                  //     )
-                  //     )
+                  Positioned(
+                      bottom: 10,
+                      left: 10,
+                      child: Text(
+                        timeUtil(DateTime.parse(article.publishedAt)),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13),
+                      ))
                 ],
               ),
             ),
