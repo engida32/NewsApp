@@ -52,7 +52,7 @@ class _TopChannelState extends State<TopChannel> {
     } else {
       return Container(
         margin: EdgeInsets.only(top:0),
-        height: MediaQuery.of(context).size.height * 0.3,
+        height: MediaQuery.of(context).size.height * 0.2,
         // height: 115,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -96,9 +96,9 @@ class _TopChannelState extends State<TopChannel> {
                             fontWeight: FontWeight.bold,
                             fontSize: 10,
                           )),
-                      SizedBox(height: 3),
+                      SizedBox(height: 5),
                       Text(sources[index].category,
-                          style: TextStyle(color: Colors.black54, fontSize: 9))
+                          style: TextStyle(color: Colors.black54, fontSize: 10))
                     ],
                   ));
             }),
