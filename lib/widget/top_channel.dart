@@ -25,7 +25,7 @@ class _TopChannelState extends State<TopChannel> {
       stream: getSourcesBloc.subject.stream,
       builder: (BuildContext context, AsyncSnapshot<SourceResponse> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.error!= null && snapshot.data!.error.length > 0) {
+          if (snapshot.data!.error != null && snapshot.data!.error.length > 0) {
             return buildErrorWidget(snapshot.data!.error);
           }
           return buildTopChannel(snapshot.data!);
@@ -51,14 +51,16 @@ class _TopChannelState extends State<TopChannel> {
       );
     } else {
       return Container(
-        height: 115,
+        margin: EdgeInsets.only(top:0),
+        height: MediaQuery.of(context).size.height * 0.3,
+        // height: 115,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: sources.length,
             itemBuilder: (context, index) {
               return Container(
                   padding: EdgeInsets.only(
-                    top: 80,
+                    top: 30,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,27 +87,19 @@ class _TopChannelState extends State<TopChannel> {
                         ),
                       ),
                       SizedBox(height: 10),
-
-                    Text(sources[index].name,
-                    maxLines: 2,
-                    
-                    textAlign:TextAlign.center,
-                    style:TextStyle(
-                      height:1.4,
-                      color:Colors.black,
-                      fontWeight:FontWeight.bold,
-                      fontSize:10,
-                    )
-                    ),
-                    SizedBox(height: 3),
-                  Text(sources[index].category,
-                    style:TextStyle(
-                      color:Colors.black54,
-                      fontSize: 9
-                    )
-                     )
+                      Text(sources[index].name,
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            height: 1.4,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                          )),
+                      SizedBox(height: 3),
+                      Text(sources[index].category,
+                          style: TextStyle(color: Colors.black54, fontSize: 9))
                     ],
-
                   ));
             }),
       );
