@@ -30,7 +30,7 @@ class _TopChannelState extends State<TopChannel> {
           }
           return buildTopChannel(snapshot.data!);
         } else if (snapshot.hasError) {
-          return buildErrorWidget(snapshot.data!.error);
+          return buildErrorWidget("ERROR LOADING DATA FROM SOURCE");
         } else {
           return buildLoadingWidget();
         }
@@ -53,6 +53,8 @@ class _TopChannelState extends State<TopChannel> {
       return Container(
         margin: EdgeInsets.only(top:0),
         height: MediaQuery.of(context).size.height * 0.2,
+      
+      
         // height: 115,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
