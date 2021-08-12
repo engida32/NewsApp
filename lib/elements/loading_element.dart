@@ -5,7 +5,9 @@ Widget buildLoadingWidget() {
   return Center(
     child: Column(
       children: [
-        CupertinoActivityIndicator()
+        CupertinoActivityIndicator(
+          radius: 23,
+        )
       ],
     ),
   );
