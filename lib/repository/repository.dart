@@ -21,7 +21,7 @@ class NewsRepository {
       return SourceResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print(" Exception occured : $error stacktrace :$stacktrace");
-      print(          "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+      // print(          "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
       return SourceResponse.withError("$error");
     }
   }
@@ -30,17 +30,17 @@ class NewsRepository {
   Future<ArticleResponse> getTopHeadLines() async {
     var params = {
       "apiKey": apiKey,
-     "country": "us",
-     "publishedAt":"publishedAt"
-
-      };
+      "country": "us",
+      "publishedAt": "publishedAt"
+    };
     try {
       Response response =
           await _dio.get(getTopHeadlinesUrl, queryParameters: params);
       return ArticleResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-            print( "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+      print(
+          "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
       return ArticleResponse.withError("$error");
     }
