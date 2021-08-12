@@ -27,8 +27,14 @@ class _MainSreenState extends State<MainSreen> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(50),
             child: AppBar(
+              titleSpacing:3,
+              elevation: 13,
+              bottomOpacity: 0,
+              centerTitle: true,
                 backgroundColor: Style.Colors.mainColor,
-                title: Text("NewsApp",
+                toolbarOpacity: 1,
+                title: Text("News App",
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
                       color: Colors.white,
                     )))),
@@ -45,7 +51,6 @@ class _MainSreenState extends State<MainSreen> {
                   return testScreen();
                 case NavBarItem.SEARCH:
                   return Container();
-            
               }
               return Container();
             },
@@ -111,15 +116,12 @@ class _MainSreenState extends State<MainSreen> {
 
   Widget testScreen() {
     return Container(
-
       color: Colors.white,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(" Test Screen")
-        ],
+        children: [Text(" Test Screen")],
       ),
     );
   }
