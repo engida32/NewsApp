@@ -6,11 +6,16 @@ Widget buildErrorWidget(String error) {
      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      Text(error,
-       style:TextStyle(
-         fontSize:13,
-         fontWeight: FontWeight.bold,
-       ))
+      //CUSTOM ERROR MESSAGE
+      Center(
+        child: Text("ERROR LOADING.....",
+         style:TextStyle(
+           fontSize:33,
+           color: Colors.red,
+           inherit: true,
+           fontWeight: FontWeight.w200,
+         )),
+      )
     ],
     )
 
