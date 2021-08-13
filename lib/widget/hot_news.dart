@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_networkimage/transition.dart';
 import 'package:newsapp/bloc/get_hotnews_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -57,122 +56,127 @@ class _HotNewsState extends State<HotNews> {
       );
     } else {
       return Container(
-        height: articles.length / 2 * 100,
+        height: articles.length / 2 * 210,
         padding: EdgeInsets.all(5),
         child: GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: 0.85),
-          itemCount: articles.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: EdgeInsets.only(left: 5, right: 5, top: 1),
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 220,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    boxShadow:[
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius:5,
-                        spreadRadius: 1,
-                        offset: Offset(1,1),
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: 0.85),
+            itemCount: articles.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: EdgeInsets.only(left: 5, right: 5, top: 1),
+                child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 220,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: Offset(1, 1),
+                            )
+                          ]),
+                      child: Column(
+                        children: [
+                          AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child:
+                                  // Container(
+                                  // decoration: BoxDecoration(
+                                  //   borderRadius: BorderRadius.only(
+                                  //     topLeft: Radius.circular(5),
+                                  //     topRight: Radius.circular(5),
 
+                                  //   ),
+                                  //   // image: DecorationImage(
+                                  //   //   image:NetworkImage(articles[index].urlToImage),
+                                  //   //   fit: BoxFit.cover,
 
-                      )
-                    ]
-                  ),
-                  child: Column(
-                    children: [
-                      AspectRatio(aspectRatio: 16/9,
-                        child: 
-                       // Container(
-                          // decoration: BoxDecoration(
-                          //   borderRadius: BorderRadius.only(
-                          //     topLeft: Radius.circular(5),
-                          //     topRight: Radius.circular(5),
+                                  //   // )
 
-                          //   ),
-                          //   // image: DecorationImage(
-                          //   //   image:NetworkImage(articles[index].urlToImage),
-                          //   //   fit: BoxFit.cover,
-
-                          //   // )
-
-                          // )
-                          FadeInImage(
-                            image: NetworkImage(articles[index].urlToImage),
-                            placeholder:AssetImage("assets/img/placeholder.jpg"),
+                                  // )
+                                  FadeInImage(
+                                fadeInCurve: Curves.bounceInOut,
+                                fit: BoxFit.cover,
+                                image: NetworkImage(articles[index].urlToImage),
+                                placeholder:
+                                    AssetImage("assets/img/placeholder.jpg"),
+                                imageErrorBuilder:
+                                    (context, error, stacktrace) {
+                                  return Image.asset(
+                                      "assets/img/placeholder.jpg");
+                                      
+                                },
+                                
+                              )),
+                          Container(
+                            padding:
+                                EdgeInsets.only(left: 10, right: 10, top: 15),
+                            child: Text(
+                              articles[index].title,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                height: 1.3,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                  left: 10,
+                                  right: 10,
+                                ),
+                                color: Colors.black12,
+                              ),
+                              Container(
+                                width: 30,
+                                height: 3,
+                                color: Color(0xfff6511d),
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    articles[index].source.name,
+                                    style: TextStyle(
+                                      color: Color(0xfff6511d),
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  Text(
+                                    timeUtil(DateTime.parse(
+                                        articles[index].publishedAt)),
+                                    style: TextStyle(
+                                      color: Color(0xfff6511d),
+                                      fontSize: 10,
+                                    ),
+                                  )
+                                ]),
                           )
-                            
-                          
-                         ),
-                         Container(
-                           padding: EdgeInsets.only(
-                             left: 10, right: 10, top:15
-                           ),
-                           child: Text(
-                             articles[index].title,
-                             textAlign: TextAlign.center,
-                             maxLines: 2,
-                             style: TextStyle(
-                               height: 1.3,
-                               fontSize:15,
-                             ),
-                           ),
-                         ),
-                         Stack(
-                           alignment: Alignment.center,
-                           children: [
-                             Container(
-                               padding: EdgeInsets.only(
-                                 left: 10, right: 10,
-                               ),
-                               color: Colors.black12,
-                             ),
-                             Container(
-                               width: 30,
-                               height: 3,
-                               color: Color(0xfff6511d),
-                             )
-                           ],
-                         ),
-                         Padding(padding: EdgeInsets.all(10),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Text(
-                               articles[index].source.name, style: TextStyle(
-                            color: Color(0xfff6511d),      
-                            fontSize:10,                     ),
-                             ),
-                               Text(
-                              timeUtil(DateTime.parse(articles[index].publishedAt)),
-                               style: TextStyle(
-                            color: Color(0xfff6511d),      
-                            fontSize:10,                     ),
-                             )
-                           ]
-                         ),
-                         
-                         )
-                    ],
-                    ),
-                      )
-                    
-                  ),
-                ); 
-           } ),
-            );
-          
-      
-      
+                        ],
+                      ),
+                    )),
+              );
+            }),
+      );
     }
   }
-    String timeUtil(DateTime date) {
+
+  String timeUtil(DateTime date) {
     return timeago.format(date, allowFromNow: true, locale: 'en');
   }
 }
