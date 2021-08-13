@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/transition.dart';
 import 'package:newsapp/bloc/get_hotnews_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -87,20 +88,27 @@ class _HotNewsState extends State<HotNews> {
                   child: Column(
                     children: [
                       AspectRatio(aspectRatio: 16/9,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
+                        child: 
+                       // Container(
+                          // decoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.only(
+                          //     topLeft: Radius.circular(5),
+                          //     topRight: Radius.circular(5),
 
-                            ),
-                            image: DecorationImage(
-                              image:NetworkImage(articles[index].urlToImage),
-                              fit: BoxFit.cover,
+                          //   ),
+                          //   // image: DecorationImage(
+                          //   //   image:NetworkImage(articles[index].urlToImage),
+                          //   //   fit: BoxFit.cover,
 
-                            )
-                            )
-                            )
+                          //   // )
+
+                          // )
+                          FadeInImage(
+                            image: NetworkImage(articles[index].urlToImage),
+                            placeholder:AssetImage("assets/img/placeholder.jpg"),
+                          )
+                            
+                          
                          ),
                          Container(
                            padding: EdgeInsets.only(
