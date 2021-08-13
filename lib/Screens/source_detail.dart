@@ -20,7 +20,9 @@ class __SourceDeStateState extends State<_SourceDeState> {
   }
 @override
 dispose(){
-  super.dispose();
+  getSourcesNewsBloc.drainStream();
+    super.dispose();
+
 }
   @override
   Widget build(BuildContext context) {
