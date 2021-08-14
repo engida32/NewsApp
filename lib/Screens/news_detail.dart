@@ -91,7 +91,9 @@ class _NewsDetailState extends State<NewsDetail> {
                 SizedBox(
                   height: 10,
                 ),
-                Html(data: article.content,shrinkToFit: true,
+                Html(data: article.content==null ? "":article.content,
+                
+                shrinkToFit: true,
                 showImages: true,),
               ],
             ),
