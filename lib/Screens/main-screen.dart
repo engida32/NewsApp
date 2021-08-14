@@ -1,9 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/source_screen.dart';
 import 'package:newsapp/bloc/bottom_navbar_bloc.dart';
 import 'package:newsapp/style/theme.dart' as Style;
 import 'package:newsapp/tab/home_screen.dart';
-import 'package:newsapp/widget/headline_slider.dart';
 
 class MainSreen extends StatefulWidget {
   MainSreen({Key? key}) : super(key: key);
@@ -48,11 +48,10 @@ class _MainSreenState extends State<MainSreen> {
                 case NavBarItem.HOME:
                   return HomeScreen();
                 case NavBarItem.SOURCE:
-                  return testScreen();
+                  return SourceScreen();
                 case NavBarItem.SEARCH:
                   return Container();
               }
-              return Container();
             },
           ),
         ),
