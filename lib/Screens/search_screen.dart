@@ -93,7 +93,7 @@ class _SearchScreenState extends State<SearchScreen> {
       builder: (BuildContext context, AsyncSnapshot<ArticleResponse> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.error.length > 0) {
-            return buildErrorWidget(snapshot.data!.error);
+            return Container();
           }
           return _buildSearchNews (snapshot.data!);
         } else if (snapshot.hasError) {

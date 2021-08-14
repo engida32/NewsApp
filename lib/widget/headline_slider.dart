@@ -81,8 +81,9 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                   Container(
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/img/placeholder.jpg',
-                       // image: article.urlToImage,
-                        image:  'https://www.industry.gov.au/sites/default/files/August%202018/image/news-placeholder-738.png',
+                        image: article.urlToImage==null ? 'assets/img/placeholder.jpg' 
+                        :article.urlToImage,
+                       // image:  'https://www.industry.gov.au/sites/default/files/August%202018/image/news-placeholder-738.png',
                         imageErrorBuilder: (context, error, stacktrace) {
                           return Image.asset("assets/img/placeholder.jpg");
                         },

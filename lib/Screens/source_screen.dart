@@ -73,36 +73,29 @@ class _SourceScreenState extends State<SourceScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Hero(
-
                         tag: sources[index].id,
-                        
                         child: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            image:DecorationImage(
-                              image: AssetImage("assets/logos/${sources[index].id}.png"),
-                              fit: BoxFit.cover
-                              )
-                          )
-
-                     
-                        )),
-
-                        Container(
-                               padding: EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            top: 15,
-                            bottom: 15,
-                          ),
-                          child: Text(sources[index].name,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              )),
-                        )
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/logos/${sources[index].id}.png"),
+                                    fit: BoxFit.cover)))),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                        right: 10,
+                        top: 15,
+                        bottom: 15,
+                      ),
+                      child: Text(sources[index].name,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
+                    )
                   ],
                 ),
               ),

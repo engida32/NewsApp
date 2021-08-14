@@ -48,7 +48,11 @@ class NewsRepository {
 
   ////////
   Future<ArticleResponse> search(String value) async {
-    var params = {"apiKey": apiKey, "q": value, "sortBy": "Popularity"};
+    var params = {
+     "apiKey": apiKey,
+     "q": value,
+     "sortBy": "Popularity"
+      };
     try {
       Response response =
           await _dio.get(everythingUrl, queryParameters: params);
