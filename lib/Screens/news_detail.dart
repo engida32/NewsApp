@@ -57,7 +57,8 @@ class _NewsDetailState extends State<NewsDetail> {
             aspectRatio: 16 / 9,
             child: FadeInImage.assetNetwork(
               placeholder: 'assets/img/placeholder.jpg',
-              image: article.urlToImage,
+              image: article.urlToImage==null ? 'assets/img/placeholder.jpg' 
+                        :article.urlToImage,
               //image:'https://eliaswondimu.com/wp-content/uploads/2020/01/placeholder.png' ,
               fit: BoxFit.cover,
               imageErrorBuilder: (context, error, stacktrace) {
