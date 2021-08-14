@@ -69,12 +69,12 @@ class _HotNewsState extends State<HotNews> {
                 padding: EdgeInsets.only(left: 5, right: 5, top: 1),
                 child: GestureDetector(
                     onTap: () {
-                       Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => NewsDetail(
-                            article: articles[index],
-                          )));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewsDetail(
+                                    article: articles[index],
+                                  )));
                     },
                     child: Container(
                       width: 220,
@@ -108,19 +108,18 @@ class _HotNewsState extends State<HotNews> {
                                   //   // )
 
                                   // )
-                                  FadeInImage(
+                                  FadeInImage.assetNetwork(
                                 fadeInCurve: Curves.bounceInOut,
                                 fit: BoxFit.cover,
-                                image: NetworkImage(articles[index].urlToImage),
-                                placeholder:
-                                    AssetImage("assets/img/placeholder.jpg"),
+                                image: articles[index].urlToImage == null
+                                    ? 'assets/img/placeholder.jpg'
+                                    : articles[index].urlToImage,
+                                placeholder: 'assets/img/placeholder.jpg',
                                 imageErrorBuilder:
                                     (context, error, stacktrace) {
                                   return Image.asset(
                                       "assets/img/placeholder.jpg");
-                                      
                                 },
-                                
                               )),
                           Container(
                             padding:
