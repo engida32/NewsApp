@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/bloc/get_source_bloc.dart';
 import 'package:newsapp/bloc/get_source_news_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -7,7 +8,6 @@ import 'package:newsapp/model/article_response.dart';
 import 'package:newsapp/model/source.dart';
 import 'package:newsapp/style/theme.dart' as Style;
 import 'package:timeago/timeago.dart' as timeago;
-
 
 class SourceDetail extends StatefulWidget {
   final SourceModel source;
@@ -23,13 +23,13 @@ class _SourceDetailState extends State<SourceDetail> {
   @override
   void initState() {
     super.initState();
-    getSourcesNewsBloc.getSourcesNewsBloc(source.id);
+    getSourceNewsBloc..getSourceNews(source.id);
   }
 
   @override
   dispose() {
     super.dispose();
-    getSourcesNewsBloc.drainStream();
+    getSourceNewsBloc.drainStreams();
   }
 
   @override
@@ -38,6 +38,9 @@ class _SourceDetailState extends State<SourceDetail> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40),
         child: AppBar(
+          iconTheme: IconThemeData(
+            color: Color(0xfff6511d),
+          ),
           title: Text(""),
         ),
       ),
@@ -65,130 +68,141 @@ class _SourceDetailState extends State<SourceDetail> {
                             ),
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage("assets/logos/${source.id}"),
+                              image:
+                                  AssetImage("assets/logos/${source.id}.png"),
                               fit: BoxFit.cover,
-                            )))
-                            ),
-
+                            )))),
               ),
-     SizedBox(height:5),
-          ]),
+              SizedBox(height: 5),
+              Text(
+                source.name,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Center(
+                child: Text(
+                  source.description,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.0,
+                  ),
+                ),
+              )
+            ]),
           ),
-          Expanded(child:StreamBuilder<ArticleResponse>(
-      stream: getSourcesNewsBloc.subject.stream,
-      builder: (BuildContext context, AsyncSnapshot<ArticleResponse> snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data!.error.length > 0) {
-            return buildErrorWidget(snapshot.data!.error);
-          }
-          return _buildSourceNews(snapshot.data!);
-        } else if (snapshot.hasError) {
-          return buildErrorWidget(snapshot.data!.error);
-        } else {
-          return buildLoadingWidget();
-        }
-      },
-     )
-          )],
-      ),
-    );
-  }
- Widget  _buildSourceNews (ArticleResponse data){
-   List<ArticleModel> articles = data.articles;
-  if(articles.length==0){
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(" NO ARTICLES")
+          Expanded(
+              child: StreamBuilder<ArticleResponse>(
+            stream: getSourceNewsBloc.subject.stream,
+            builder: (BuildContext context,
+                AsyncSnapshot<ArticleResponse> snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data!.error.length > 0) {
+                  return buildErrorWidget(snapshot.data!.error);
+                }
+                return _buildSourceNews(snapshot.data!);
+              } else if (snapshot.hasError) {
+                return buildErrorWidget(snapshot.data!.error);
+              } else {
+                return buildLoadingWidget();
+              }
+            },
+          ))
         ],
       ),
     );
-    
-    }else{
+  }
+
+  Widget _buildSourceNews(ArticleResponse data) {
+    List<ArticleModel> articles = data.articles;
+    if (articles.length == 0) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [Text(" NO ARTICLES")],
+        ),
+      );
+    } else {
       return ListView.builder(
-        itemCount: articles.length,
-        itemBuilder: (context, index){
-          return GestureDetector(
-          onTap:(){},
-          child: Container(
-            decoration:BoxDecoration( border:Border(
-              top:BorderSide(
-                color: Colors.grey,
-                width:1,
-
-              )),
-
-           color: Colors.white,
-            ),
-            height:150,
-
+          itemCount: articles.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {},
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.grey, width: 1.0),
+                  ),
+                  color: Colors.white,
+                ),
+                height: 150,
                 child: Row(
-                 children: [
-                   Container(
-                     padding: EdgeInsets.all(10),
-                       width:MediaQuery.of(context).size.width*3/5,
-                    child:Column(
-                      children: [
-                        Text(
-                          articles[index].title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize:14,
-
-                          )
-                        ),
-                        Expanded(child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Row(
-                            children: [
-                              Text(
-                                timeUtil(DateTime.parse(articles[index].publishedAt),
-                               ),style: TextStyle(
-                                 color: Colors.black26,
-                                 fontWeight: FontWeight.bold,
-                                 fontSize:10,
-                               )
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                   right:10,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                      width: MediaQuery.of(context).size.width * 3 / 5,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(articles[index].title,
+                              maxLines: 3,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 17.0)),
+                          Expanded(
+                              child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                        timeUtil(DateTime.parse(
+                                            articles[index].publishedAt)),
+                                        style: TextStyle(
+                                            color: Colors.black26,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10.0))
+                                  ],
                                 ),
-                                width:MediaQuery.of(context).size.width*2/5,
-                                height: 35,
-                                child: FadeInImage.assetNetwork(
-                                  placeholder: "assets/img/placeholder.jpg",
-                                   image: articles[index].urlToImage,
-                                    fit: BoxFit.fitHeight,
-                                    width:double.maxFinite,
-                                    height:MediaQuery.of(context).size.height,
-                                   ),
-                                  
-
-                              )
-                            ]
-                          ),
-                        ))
-                      ]
-                    )
-                     
-                   )
-                 ], 
-                )
-                          ),
-          
-          );
-        }
-        
-        );
+                              ],
+                            ),
+                          ))
+                        ],
+                      ),
+                    ),
+                    Container(
+                        padding: EdgeInsets.only(right: 10.0),
+                        width: MediaQuery.of(context).size.width * 2 / 5,
+                        height: 130,
+                        child: FadeInImage.assetNetwork(
+                            alignment: Alignment.topCenter,
+                            placeholder: 'assets/img/placeholder.jpg',
+                            image: articles[index].urlToImage == null
+                                ? "http://to-let.com.bd/operator/images/noimage.png"
+                                : articles[index].urlToImage,
+                            fit: BoxFit.fitHeight,
+                            width: double.maxFinite,
+                            height: MediaQuery.of(context).size.height * 1 / 3))
+                  ],
+                ),
+              ),
+            );
+          });
     }
   }
+}
 
- }
-
- String timeUtil(DateTime date) {
-    return timeago.format(date, allowFromNow: true, locale: 'en');
-  }
+String timeUtil(DateTime date) {
+  return timeago.format(date, allowFromNow: true, locale: 'en');
+}
