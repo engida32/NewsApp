@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/source_detail.dart';
 import 'package:newsapp/bloc/get_source_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -50,7 +51,14 @@ class _SourceScreenState extends State<SourceScreen> {
            top: 10
          ),
          child: GestureDetector(
-           onTap: (){},
+           onTap: (){
+               Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SourceDetail(
+                                    source: sources[index],
+                                  )));
+           },
            child: Container(
              width:100,
              decoration: BoxDecoration(
