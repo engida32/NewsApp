@@ -11,14 +11,14 @@ class SourceScreen extends StatefulWidget {
 
   @override
   _SourceScreenState createState() => _SourceScreenState();
-
 }
 
 class _SourceScreenState extends State<SourceScreen> {
-    void initState() {
+  void initState() {
     super.initState();
     getSourcesBloc..getSources();
   }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<SourceResponse>(
@@ -37,74 +37,77 @@ class _SourceScreenState extends State<SourceScreen> {
       },
     );
   }
+
   Widget buildSource(SourceResponse data) {
-    List<SourceModel> sources= data.sources;
+    List<SourceModel> sources = data.sources;
     return GridView.builder(
-      itemCount: sources.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-      childAspectRatio: 0.86),
-       itemBuilder: (context,index) {
-         return Padding(padding: EdgeInsets.only(
-           left: 5,
-           right: 5,
-           top: 10
-         ),
-         child: GestureDetector(
-           onTap: (){
-               Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SourceDetail(
-                                    source: sources[index],
-                                  )));
-           },
-           child: Container(
-             width:100,
-             decoration: BoxDecoration(
-               color: Colors.white,
-               borderRadius: BorderRadius.all(Radius.circular(5)),
-               boxShadow:[
-              BoxShadow( 
-                color: Colors.grey,
-                blurRadius: 5,
-                spreadRadius: 1,
-                offset: Offset(1, 1),
-              
-              )
-               ] 
+        itemCount: sources.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, childAspectRatio: 0.86),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(left: 5, right: 5, top: 10),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SourceDetail(
+                              source: sources[index],
+                            )));
+              },
+              child: Container(
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5,
+                        spreadRadius: 1,
+                        offset: Offset(1, 1),
+                      )
+                    ]),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Hero(
 
-             ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Hero(
-              tag: sources[index].id,
-             child: Container(
-               padding: EdgeInsets.only(
-                 left: 10,
-                 right: 10,
-                 top: 15,
-                 bottom: 15,
-               ),
-               child: Text(
-                 sources[index].name,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    
-                  )
-               ),
-             ))
-          ],
-        ),
+                        tag: sources[index].id,
+                        
+                        child: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            image:DecorationImage(
+                              image: AssetImage("assets/logos/${sources[index].id}.png"),
+                              fit: BoxFit.cover
+                              )
+                          )
 
-           ),
-           ),
-         );
-       }
-       
-       );
+                     
+                        )),
+
+                        Container(
+                               padding: EdgeInsets.only(
+                            left: 10,
+                            right: 10,
+                            top: 15,
+                            bottom: 15,
+                          ),
+                          child: Text(sources[index].name,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
