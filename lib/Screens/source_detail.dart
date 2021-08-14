@@ -9,17 +9,17 @@ import 'package:newsapp/style/theme.dart' as Style;
 import 'package:timeago/timeago.dart' as timeago;
 
 
-class _SourceDeState extends StatefulWidget {
+class SourceDetail extends StatefulWidget {
   final SourceModel source;
-  const _SourceDeState({Key? key, required this.source}) : super(key: key);
+  const SourceDetail({Key? key, required this.source}) : super(key: key);
 
   @override
-  __SourceDeStateState createState() => __SourceDeStateState(source);
+  _SourceDetailState createState() => _SourceDetailState(source);
 }
 
-class __SourceDeStateState extends State<_SourceDeState> {
+class _SourceDetailState extends State<SourceDetail> {
   late final SourceModel source;
-  __SourceDeStateState(this.source);
+  _SourceDetailState(this.source);
   @override
   void initState() {
     super.initState();
