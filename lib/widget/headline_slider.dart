@@ -51,6 +51,7 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
             enlargeCenterPage: false,
             viewportFraction: 0.9,
             autoPlay: true,
+            autoPlayInterval:Duration(seconds: 5),
             height: 250,
           ),
           items: getSliderItem(articles),
