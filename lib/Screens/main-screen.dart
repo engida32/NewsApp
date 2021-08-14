@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/search_screen.dart';
 import 'package:newsapp/Screens/source_screen.dart';
 import 'package:newsapp/bloc/bottom_navbar_bloc.dart';
 import 'package:newsapp/style/theme.dart' as Style;
@@ -50,7 +51,7 @@ class _MainSreenState extends State<MainSreen> {
                 case NavBarItem.SOURCE:
                   return SourceScreen();
                 case NavBarItem.SEARCH:
-                  return Container();
+                  return SearchScreen();
               }
             },
           ),
