@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/bloc/get_source_bloc.dart';
 import 'package:newsapp/bloc/get_source_news_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -39,7 +38,7 @@ class _SourceDetailState extends State<SourceDetail> {
         preferredSize: Size.fromHeight(40),
         child: AppBar(
           iconTheme: IconThemeData(
-            color: Color(0xfff6511d),
+            color: Color(0xFFB4A19C),
           ),
           title: Text(""),
         ),
@@ -87,8 +86,10 @@ class _SourceDetailState extends State<SourceDetail> {
               Center(
                 child: Text(
                   source.description,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
                     fontSize: 12.0,
                   ),
                 ),
@@ -188,9 +189,10 @@ class _SourceDetailState extends State<SourceDetail> {
                         child: FadeInImage.assetNetwork(
                             alignment: Alignment.topCenter,
                             placeholder: 'assets/img/placeholder.jpg',
-                            image: articles[index].urlToImage == null
-                                ? "http://to-let.com.bd/operator/images/noimage.png"
-                                : articles[index].urlToImage,
+                            image: articles[index].urlToImage,
+                            imageErrorBuilder: (context, error, stacktrace) {
+                              return Image.asset("assets/img/placeholder.jpg");
+                            },
                             fit: BoxFit.fitHeight,
                             width: double.maxFinite,
                             height: MediaQuery.of(context).size.height * 1 / 3))
