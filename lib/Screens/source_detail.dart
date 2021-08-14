@@ -37,8 +37,10 @@ class _SourceDetailState extends State<SourceDetail> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(40),
         child: AppBar(
+          elevation: 0,
+          backgroundColor: Style.Colors.mainColor,
           iconTheme: IconThemeData(
-            color: Color(0xFFB4A19C),
+            color: Color(0xFF1261C8),
           ),
           title: Text(""),
         ),
@@ -88,7 +90,7 @@ class _SourceDetailState extends State<SourceDetail> {
                   source.description,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.amberAccent,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,
                   ),
