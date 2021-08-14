@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/source_detail.dart';
 import 'package:newsapp/bloc/get_source_bloc.dart';
 import 'package:newsapp/model/source.dart';
 import 'package:newsapp/model/source_response.dart';
@@ -51,10 +52,9 @@ class _TopChannelState extends State<TopChannel> {
       );
     } else {
       return Container(
-        margin: EdgeInsets.only(top:0),
+        margin: EdgeInsets.only(top: 0),
         height: MediaQuery.of(context).size.height * 0.2,
-      
-      
+
         // height: 115,
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -64,44 +64,56 @@ class _TopChannelState extends State<TopChannel> {
                   padding: EdgeInsets.only(
                     top: 30,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Hero(
-                        tag: sources[index].id,
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 5,
-                                  spreadRadius: 1,
-                                  offset: Offset(1, 1),
-                                )
-                              ],
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/logos/${sources[index].id}.png"))),
+                  width: 80,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SourceDetail(
+                                    source: sources[index],
+                                  )));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Hero(
+                          tag: sources[index].id,
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 5,
+                                    spreadRadius: 1,
+                                    offset: Offset(1, 1),
+                                  )
+                                ],
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/logos/${sources[index].id}.png"))),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(sources[index].name,
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            height: 1.4,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 10,
-                          )),
-                      SizedBox(height: 5),
-                      Text(sources[index].category,
-                          style: TextStyle(color: Colors.black54, fontSize: 10))
-                    ],
+                        SizedBox(height: 10),
+                        Text(sources[index].name,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              height: 1.4,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10,
+                            )),
+                        SizedBox(height: 5),
+                        Text(sources[index].category,
+                            style:
+                                TextStyle(color: Colors.black54, fontSize: 10))
+                      ],
+                    ),
                   ));
             }),
       );
