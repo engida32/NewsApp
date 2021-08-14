@@ -21,7 +21,6 @@ class NewsRepository {
       return SourceResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print(" Exception occured : $error stacktrace :$stacktrace");
-      // print(          "no result ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
       return SourceResponse.withError("$error");
     }
   }
@@ -65,7 +64,13 @@ class NewsRepository {
 
   //////// getting hot news from repository
   Future<ArticleResponse> getHotNews() async {
-    var params = {"apiKey": apiKey, "q": "apple", "sortBy": "popularity"};
+    var params = {
+      "apiKey": apiKey,
+      "q": "technology + politics ",
+      "sortBy": "date",
+      
+      
+      };
 
     try {
       Response response =
