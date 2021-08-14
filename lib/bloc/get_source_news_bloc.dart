@@ -6,10 +6,16 @@ class GetSourcesNewsBloc {
   final NewsRepository repository = NewsRepository();
   final BehaviorSubject<ArticleResponse> _subject =
       BehaviorSubject<ArticleResponse>();
-  // void drainStreams() {
-  //   _subject.value = null;
+
+        getSourceNews(String sourceId) async {
+    ArticleResponse response = await repository.getSourceNews(sourceId);
+    _subject.sink.add(response);
+  }
+
+  void drainStreams() {
+    _subject.value = null;
     
-  // }
+  }
 
 
   void dispose() async {
@@ -20,4 +26,4 @@ class GetSourcesNewsBloc {
   BehaviorSubject<ArticleResponse> get subject => _subject;
 }
 
-final getSourcesNewsBloc = getSourcesNewsBloc();
+final getSourceNewsBloc = GetSourcesNewsBloc();
