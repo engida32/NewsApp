@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/news_detail.dart';
 import 'package:newsapp/bloc/get_source_news_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -136,7 +137,14 @@ class _SourceDetailState extends State<SourceDetail> {
           itemCount: articles.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                 Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsDetail(
+                            article: articles[index],
+                          )));
+              },
               child: Container(
                 decoration: BoxDecoration(
                   border: Border(

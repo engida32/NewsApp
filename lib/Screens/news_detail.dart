@@ -13,27 +13,28 @@ class NewsDetail extends StatefulWidget {
 }
 
 class _NewsDetailState extends State<NewsDetail> {
-  late final ArticleModel article;
+  final ArticleModel article;
   _NewsDetailState(this.article);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: GestureDetector(
-        onTap: () { 
+        onTap: () {
           launch(article.url);
         },
         child: Container(
-          height:40,
+          height: 40,
           width: MediaQuery.of(context).size.width,
+          color: Style.Colors.mainColor,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Read More",
-                style:TextStyle(
-                   color:Style.Colors.mainColor,
-                   )
-              )
+              Text("Read More",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize:15
+                  ))
             ],
           ),
         ),
@@ -57,12 +58,18 @@ class _NewsDetailState extends State<NewsDetail> {
             child: FadeInImage.assetNetwork(
               placeholder: 'assets/img/placeholder.jpg',
               image: article.urlToImage,
+              //image:'https://eliaswondimu.com/wp-content/uploads/2020/01/placeholder.png' ,
               fit: BoxFit.cover,
+              imageErrorBuilder: (context, error, stacktrace) {
+                return Image.asset("assets/img/placeholder.jpg");
+              },
             ),
           ),
           Container(
             padding: EdgeInsets.all(10),
             child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
+
               children: [
                 SizedBox(
                   height: 10,

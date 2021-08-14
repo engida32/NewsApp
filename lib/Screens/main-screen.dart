@@ -44,7 +44,7 @@ class _MainSreenState extends State<MainSreen> {
             initialData: _navBarController.defaultItem,
             builder:
                 (BuildContext context, AsyncSnapshot<NavBarItem> snapshot) {
-              switch (snapshot.data) {
+              switch (snapshot.data!) {
                 case NavBarItem.HOME:
                   return HomeScreen();
                 case NavBarItem.SOURCE:

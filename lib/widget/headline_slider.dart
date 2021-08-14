@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/news_detail.dart';
 import 'package:newsapp/bloc/get_top_headlines_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -44,17 +45,16 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
     List<ArticleModel> articles = data.articles;
 
     return Container(
-      padding: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.only(top: 10),
         child: CarouselSlider(
-      options: CarouselOptions(
-        enlargeCenterPage: false,
-        viewportFraction: 0.9,
-        autoPlay: true,
-      
-        height: 250,
-      ),
-      items: getSliderItem(articles),
-    ));
+          options: CarouselOptions(
+            enlargeCenterPage: false,
+            viewportFraction: 0.9,
+            autoPlay: true,
+            height: 250,
+          ),
+          items: getSliderItem(articles),
+        ));
   }
 
   getSliderItem(List<ArticleModel> articles) {
@@ -62,7 +62,14 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
     return articles
         .map(
           (article) => GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsDetail(
+                            article: article,
+                          )));
+            },
             child: Container(
               padding: EdgeInsets.only(
                 left: 5,
@@ -72,13 +79,24 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
               child: Stack(
                 children: [
                   Container(
-                      decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    shape: BoxShape.rectangle,
-                    image: new DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(article.urlToImage)),
-                  )),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/img/placeholder.jpg',
+                       // image: article.urlToImage,
+                        image:  'https://www.industry.gov.au/sites/default/files/August%202018/image/news-placeholder-738.png',
+                        imageErrorBuilder: (context, error, stacktrace) {
+                          return Image.asset("assets/img/placeholder.jpg");
+                        },
+                      fit: BoxFit.cover,
+
+                      ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.all(Radius.circular(8)),
+                      //   shape: BoxShape.rectangle,
+                      //   image: new DecorationImage(
+                      //       fit: BoxFit.cover,
+                      //       image: NetworkImage(article.urlToImage)),
+                      // )
+                      ),
                   Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(9)),
@@ -92,13 +110,16 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
                   Positioned(
                       bottom: 30,
                       child: Container(
+                        alignment: Alignment.center,
                           padding: EdgeInsets.only(left: 10, right: 10),
                           width: 250,
                           child: Column(
+                            
                             children: [
                               Text(article.title,
-                              textAlign: TextAlign.center,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
+                                    
                                     height: 1.5,
                                     color: Colors.white,
                                     fontSize: 17,

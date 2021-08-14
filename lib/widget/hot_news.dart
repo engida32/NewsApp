@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/Screens/news_detail.dart';
 import 'package:newsapp/bloc/get_hotnews_bloc.dart';
 import 'package:newsapp/elements/error_element.dart';
 import 'package:newsapp/elements/loading_element.dart';
@@ -67,7 +68,14 @@ class _HotNewsState extends State<HotNews> {
               return Padding(
                 padding: EdgeInsets.only(left: 5, right: 5, top: 1),
                 child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                       Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsDetail(
+                            article: articles[index],
+                          )));
+                    },
                     child: Container(
                       width: 220,
                       decoration: BoxDecoration(
