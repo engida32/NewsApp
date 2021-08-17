@@ -53,7 +53,9 @@ class _NewsDetailState extends State<NewsDetail> {
         ),
       ),
       body: ListView(
+        
         children: [
+          
           AspectRatio(
             aspectRatio: 16 / 9,
             child: FadeInImage.assetNetwork(
@@ -68,6 +70,7 @@ class _NewsDetailState extends State<NewsDetail> {
             ),
           ),
           Container(
+            
             padding: EdgeInsets.all(10),
             child: Column(
            mainAxisAlignment: MainAxisAlignment.center,
