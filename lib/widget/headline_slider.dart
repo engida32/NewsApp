@@ -45,7 +45,7 @@ class _HeadLineSliderWidgetState extends State<HeadLineSliderWidget> {
     List<ArticleModel> articles = data.articles;
 
     return Container(
-        padding: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.only(top:4),
         child: CarouselSlider(
           options: CarouselOptions(
             enlargeCenterPage: false,
