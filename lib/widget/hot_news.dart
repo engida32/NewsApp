@@ -57,6 +57,7 @@ class _HotNewsState extends State<HotNews> {
       );
     } else {
       return Container(
+ 
         height: articles.length / 2 * 210,
         padding: EdgeInsets.all(5),
         child: GridView.builder(
