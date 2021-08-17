@@ -66,7 +66,7 @@ class NewsRepository {
   Future<ArticleResponse> getHotNews() async {
     var params = {
       "apiKey": apiKey,
-      "q": "technology + politics ",
+      "q": "technology",
       "sortBy": "date",
       
       
