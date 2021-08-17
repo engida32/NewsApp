@@ -40,6 +40,7 @@ class _NewsDetailState extends State<NewsDetail> {
         ),
       ),
       appBar: AppBar(
+        primary: false,
         elevation: 0,
         backgroundColor: Style.Colors.mainColor,
         title: Text(
@@ -92,8 +93,8 @@ class _NewsDetailState extends State<NewsDetail> {
                 SizedBox(
                   height: 10,
                 ),
-                Html(data: article.content==null ? "":article.content,
-                
+                Html(data: article.content==null ? " ": article.content,
+                renderNewlines: true,
                 shrinkToFit: true,
                 showImages: true,),
               ],
