@@ -2,7 +2,6 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:newsapp/Screens/main-screen.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -12,28 +11,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title:'News App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: AnimatedSplashScreen(
+        debugShowCheckedModeBanner: false,
+        title: 'News App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: AnimatedSplashScreen(
           duration: 3000,
-          splash: Container(
-            child: AnimatedDefaultTextStyle(child: Text("NEWS "), style: TextStyle(
-              fontSize: 12,
-              fontStyle: FontStyle.italic,
-              color: Colors.blue,
-            ),
-             duration: const Duration( milliseconds :3000) ,),
+          splash: Text(
+            "WORLD NEWS ",
+            style: TextStyle(
+                fontSize: 33,
+                fontStyle: FontStyle.italic,
+                color: Colors.red.shade300,
+                fontWeight: FontWeight.w900),
           ),
+          curve: Curves.easeInOutCirc,
           centered: true,
-          splashTransition: SplashTransition.fadeTransition,
-          backgroundColor: Colors.blue,
+          splashIconSize: 35,
+          splashTransition: SplashTransition.rotationTransition,
+          backgroundColor: Colors.indigo.shade300,
           nextScreen: MainSreen(),
-      ) 
-      
-    
-    );
+        ));
   }
 }
