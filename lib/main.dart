@@ -19,7 +19,10 @@ class MyApp extends StatelessWidget {
         home: AnimatedSplashScreen(
           duration: 3000,
           splash: Text(
-            "WORLD NEWS ",
+            
+            "WORLD NEWS  ",
+            maxLines: 2,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 33,
                 fontStyle: FontStyle.italic,
