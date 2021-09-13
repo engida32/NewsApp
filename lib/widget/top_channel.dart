@@ -68,6 +68,7 @@ class _TopChannelState extends State<TopChannel> {
                   width: 80,
                   child: GestureDetector(
                     onTap: () {
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
